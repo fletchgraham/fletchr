@@ -27,7 +27,7 @@ def init_db():
 	with current_app.open_resource('schema.sql') as f:
 		db.executescript(f.read().decode('utf8'))
 	
-	# open_resource opens a file relative to the flaskr package
+	# open_resource opens a file relative to the fletchr package
 
 @click.command('init-db') # create a command line command
 @with_appcontext
