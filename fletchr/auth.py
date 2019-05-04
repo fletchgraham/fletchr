@@ -57,9 +57,27 @@ def login():
 		elif not check_password_hash(user['password'], password):
 			error = 'Incorrect passoword.'
 
+		if error is None:
+			session.clear()
+			session['user_id'] = user['id']
+			return redirect(url_for('index'))
+
 		flash(error)
 
 	return render_template('auth/login.html')
+
+# before each request, check for user in the session
+# then we make the user accessable so we can get its name and whatnot
+@bp.before_app_request
+def load_logged_in_user():
+	user_id = session.get('user_id')
+
+	if user_id is None:
+		g.user = None
+	else:
+		g.user = get_db().execute(
+			'SELECT * FROM user WHERE id = ?', (user_id,)
+		).fetchone()
 
 @bp.route('/logout') # we have to remove the user from the session
 def logout():
