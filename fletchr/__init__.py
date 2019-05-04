@@ -18,7 +18,7 @@ def create_app(test_config=None):
 		app.config.from_mapping(test_config)
 
 	# ensure the instance folder exists
-	try: # is this breaking the 'ask forgiveness rule?' 
+	try: # is this breaking the 'ask forgiveness rule?'
 		os.makedirs(app.instance_path)
 	except OSError:
 		pass
@@ -30,10 +30,10 @@ def create_app(test_config=None):
 
 	from . import db # relative import
 	db.init_app(app)
-	
+
+	# instead of defining all the routes here, they are defined in blueprints
+	# and registered like so
 	from . import auth
 	app.register_blueprint(auth.bp)
 
 	return app
-
-

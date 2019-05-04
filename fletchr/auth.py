@@ -60,3 +60,22 @@ def login():
 		flash(error)
 
 	return render_template('auth/login.html')
+
+@bp.route('/logout') # we have to remove the user from the session
+def logout():
+	session.clear()
+	return redirect(url_for('index'))
+
+# creating editing and deleting blog posts will require user to be logged in
+# we use a decorator for this
+
+def login_required(view):
+	@functools.wraps(view)
+	def wrapped_view(**kwargs):
+		if g.user is None: # check if user is loaded
+			# redirect to login if not
+			return redirect(url_for('auth.login'))
+			# if using a blueprint the name is prepended to the name of the
+			# view function
+		return view(**kwargs)
+	return wrapped_view
