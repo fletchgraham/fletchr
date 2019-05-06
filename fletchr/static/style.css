@@ -1,5 +1,5 @@
 html {
-  font-family: sans-serif;
+  font-family: monospace;
   background: #eee;
   padding: 1rem;
 }
@@ -11,13 +11,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: serif;
-  color: #377ba8;
+  font-family: monospace;
+  color: #6900ff;
   margin: 1rem 0;
 }
 
 a {
-  color: #377ba8;
+  color: #6900ff;
 }
 
 hr {
