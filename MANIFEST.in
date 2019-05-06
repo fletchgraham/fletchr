@@ -1,0 +1,4 @@
+include fletchr/schema.sql
+graft fletchr/static
+graft fletchr/templates
+global-exclude *.pyc
